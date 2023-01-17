@@ -20,22 +20,37 @@ function createHtmlElements(data) {
   characterContainer.classList.add("character-list");
   const locationContainer = document.createElement("div");
   locationContainer.classList.add("location-list");
+  let id = 1;
   data.results.forEach((character) => {
-    main.append(addCharacter(character, characterContainer));
+    main.append(addCharacter(character, characterContainer, id));
+    id++;
     main.append(addLocation(character, locationContainer));
   });
+  
+  addEventListenerToSection();
 
   document.body.append(main);
 }
 
+function addEventListenerToSection() {
+  let listOfSections = document.getElementsByTagName("section");
+
+  listOfSections.forEach(section => {
+    section.addEventListener("click", (id => {
+      
+    }));
+  })
+}
+
+function addCharacter(character, characterContainer, id) {
+    characterContainer.innerHTML += `<section id=${id}>${character.name} </section>` + `<br>`;
+
+    return characterContainer; 
+  }
+
 function addLocation(character, locationContainer) {
   locationContainer.innerHTML += `${character.location.name}` + `<br>`;
   return locationContainer;
-}
-
-function addCharacter(character, characterContainer) {
-  characterContainer.innerHTML += `${character.name}` + `<br>`;
-  return characterContainer;
 }
 
 function createButton(buttonName) {
